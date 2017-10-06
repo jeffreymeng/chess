@@ -137,6 +137,12 @@
                 }
             }
         }
+        var onMoveEnd = function(oldPos, newPos) {
+            console.log("Move animation complete:");
+            console.log("Old position: " + ChessBoard.objToFen(oldPos));
+            console.log("New position: " + ChessBoard.objToFen(newPos));
+            console.log("--------------------");
+        };
         var cfg = {
             draggable: true,
             position: 'start',
@@ -144,7 +150,9 @@
             onDrop: onDrop,
             onMouseoutSquare: onMouseoutSquare,
             onMouseoverSquare: onMouseoverSquare,
-            onSnapEnd: onSnapEnd
+            onSnapEnd: onSnapEnd,
+            onMoveEnd: onMoveEnd
+
 
         };
         board = ChessBoard('board', cfg);
