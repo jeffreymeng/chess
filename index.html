@@ -40,7 +40,7 @@
             game = new Chess(),
             statusEl = $('#status'),
             fenEl = $('#fen'),
-            pgnEl = $('#pgn');;
+            pgnEl = $('#pgn');
 
         var removeGreySquares = function() {
             $('#board .square-55d63').css('background', '');
@@ -136,6 +136,10 @@
                     status += ', ' + moveColor + ' is in check';
                 }
             }
+
+            statusEl.html(status);
+            fenEl.html(game.fen());
+            pgnEl.html(game.pgn());
         }
         var onMoveEnd = function(oldPos, newPos) {
             console.log("Move animation complete:");
