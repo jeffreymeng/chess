@@ -18,7 +18,11 @@
             <p class="text-muted">Work in progress. This is just a testing page.</p>
             <hr>
             <div id="board" style="width: 400px"></div>
-
+            <div class="well">
+                <p><b>Status</b>: <span id="status"></span></p>
+                <p><b>FEN</b>: <span id="fen"></span></p>
+                <p><b>PGN</b>: <span id="pgn"></span></p>
+            </div>
 
 
 
@@ -31,7 +35,7 @@
 
     <script src="js/chess.js"></script>
     <script>
-    //HUGE THANK YOU to http://chessboardjs.com/examples#5000 and http://chessboardjs.com/examples#5003
+        //HUGE THANK YOU to http://chessboardjs.com/examples#5000 and http://chessboardjs.com/examples#5003
         var board,
             game = new Chess(),
             statusEl = $('#status'),
@@ -106,44 +110,44 @@
             board.position(game.fen());
         };
         var updateStatus = function() {
-                var status = '';
+            var status = '';
 
-                var moveColor = 'White';
-                if (game.turn() === 'b') {
-                    moveColor = 'Black';
+            var moveColor = 'White';
+            if (game.turn() === 'b') {
+                moveColor = 'Black';
+            }
+
+            // checkmate?
+            if (game.in_checkmate() === true) {
+                status = 'Game over, ' + moveColor + ' is in checkmate.';
+            }
+
+            // draw?
+            else if (game.in_draw() === true) {
+                status = 'Game over, drawn position';
+            }
+
+            // game still on
+            else {
+                status = moveColor + ' to move';
+
+                // check?
+                if (game.in_check() === true) {
+                    status += ', ' + moveColor + ' is in check';
                 }
-
-                // checkmate?
-                if (game.in_checkmate() === true) {
-                    status = 'Game over, ' + moveColor + ' is in checkmate.';
-                }
-
-                // draw?
-                else if (game.in_draw() === true) {
-                    status = 'Game over, drawn position';
-                }
-
-                // game still on
-                else {
-                    status = moveColor + ' to move';
-
-                    // check?
-                    if (game.in_check() === true) {
-                        status += ', ' + moveColor + ' is in check';
-                    }
-                }
+            }
         }
-                var cfg = {
-                    draggable: true,
-                    position: 'start',
-                    onDragStart: onDragStart,
-                    onDrop: onDrop,
-                    onMouseoutSquare: onMouseoutSquare,
-                    onMouseoverSquare: onMouseoverSquare,
-                    onSnapEnd: onSnapEnd
+        var cfg = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            onMouseoutSquare: onMouseoutSquare,
+            onMouseoverSquare: onMouseoverSquare,
+            onSnapEnd: onSnapEnd
 
-                };
-                board = ChessBoard('board', cfg);
+        };
+        board = ChessBoard('board', cfg);
     </script>
 </body>
 
