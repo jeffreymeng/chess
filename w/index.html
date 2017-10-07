@@ -149,7 +149,7 @@
             console.log("New position: " + ChessBoard.objToFen(newPos));
             console.log("--------------------");
         };
-        var onDragStart = function() {
+        var onDragStart = function(source, piece, position, orientation) {
             if ((!white && piece.search(/^w/) === -1) || (white && peice.search(/^b/) === -1)) {
                 return false;
             }
