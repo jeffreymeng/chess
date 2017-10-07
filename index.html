@@ -155,7 +155,12 @@
             onMouseoutSquare: onMouseoutSquare,
             onMouseoverSquare: onMouseoverSquare,
             onSnapEnd: onSnapEnd,
-            onMoveEnd: onMoveEnd
+            onMoveEnd: /*onMoveEnd*/function(oldPos, newPos) {
+            console.log("Move animation complete:");
+            console.log("Old position: " + ChessBoard.objToFen(oldPos));
+            console.log("New position: " + ChessBoard.objToFen(newPos));
+            console.log("--------------------");
+        }
 
 
         };
