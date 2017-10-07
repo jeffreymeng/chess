@@ -35,12 +35,14 @@
 
     <script src="js/chess.js"></script>
     <script>
+    /* global $ Chess ChessBoard */
         //HUGE THANK YOU to http://chessboardjs.com/examples#5000 and http://chessboardjs.com/examples#5003
-        var board,
-            game = new Chess(),
-            statusEl = $('#status'),
-            fenEl = $('#fen'),
-            pgnEl = $('#pgn');
+        var board;
+        var game = new Chess();
+        var statusEl = $('#status');
+        var fenEl = $('#fen');
+        var pgnEl = $('#pgn');
+        var white = true;//white or black
 
         var removeGreySquares = function() {
             $('#board .square-55d63').css('background', '');
@@ -147,6 +149,11 @@
             console.log("New position: " + ChessBoard.objToFen(newPos));
             console.log("--------------------");
         };
+        var onDragStart = function() {
+            if ((!white && piece.search(/^w/) === -1) || (white && peice.search(/^b/) === -1)) {
+                return false;
+            }
+        };
         var cfg = {
             draggable: true,
             position: 'start',
@@ -155,11 +162,15 @@
             onMouseoutSquare: onMouseoutSquare,
             onMouseoverSquare: onMouseoverSquare,
             onSnapEnd: onSnapEnd,
-            onMoveEnd: onMoveEnd
+            onMoveEnd: onMoveEnd,
+            onDragStart: onDragStart
 
 
         };
         board = ChessBoard('board', cfg);
+        if (!white) {
+            board.flip();
+        }
     </script>
 </body>
 
