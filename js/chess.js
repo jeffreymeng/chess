@@ -32,6 +32,7 @@
  * Released under the BSD license
  * https://github.com/jhlywa/chess.js/blob/master/LICENSE
  */
+ //modification: added turn function in constants variable
 
 var Chess = function(fen) {
 
@@ -1186,6 +1187,7 @@ var Chess = function(fen) {
     /***************************************************************************
      * PUBLIC CONSTANTS (is there a better way to do this?)
      **************************************************************************/
+    
     WHITE: WHITE,
     BLACK: BLACK,
     PAWN: PAWN,
@@ -1194,6 +1196,13 @@ var Chess = function(fen) {
     ROOK: ROOK,
     QUEEN: QUEEN,
     KING: KING,
+    turn: function(newTurn) {
+      if (newTurn === "white" || newTurn === "black") {
+        turn = newTurn;
+      } else {
+        return turn;
+      }
+    },  
     SQUARES: (function() {
                 /* from the ECMA-262 spec (section 12.6.4):
                  * "The mechanics of enumerating the properties ... is
