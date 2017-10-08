@@ -90,7 +90,9 @@
             
             //a color you are not in control of (you are black and the peice is white, vice versa)
             console.log(piece);
-            if ((!white && piece.search(/^w/) > -1) || (white && piece.search(/^b/) > -1)) {
+            if (!peice) {
+                return;
+            } else if ((!white && piece.search(/^w/) > -1) || (white && piece.search(/^b/) > -1)) {
                 return;
             }
             
