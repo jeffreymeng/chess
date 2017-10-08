@@ -81,6 +81,7 @@
 
             // illegal move
             if (move === null) return 'snapback';
+            
             updateStatus();
 
         };
@@ -88,6 +89,7 @@
         var onMouseoverSquare = function(square, piece) {
             
             //a color you are not in control of (you are black and the peice is white, vice versa)
+            console.log(piece);
             if ((!white && piece.search(/^w/) > -1) || (white && piece.search(/^b/) > -1)) {
                 return;
             }
@@ -148,7 +150,7 @@
             statusEl.html(status);
             fenEl.html(game.fen());
             pgnEl.html(game.pgn());
-        }
+        };
         var onMoveEnd = function(oldPos, newPos) {
             console.log("Move animation complete:");
             console.log("Old position: " + ChessBoard.objToFen(oldPos));
